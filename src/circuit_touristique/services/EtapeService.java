@@ -47,23 +47,25 @@ public class EtapeService {
         list.add(etape);
         etape = new Etape(1,3,"Tozeur",2,"Continuation vers Tozeur.Dîner nuit à Tozeur" );
         list.add(etape);
-        etape =new Etape(1,4,"Tozeur",3,"Matinée libre. Possibilité d'effectuer une excursion à la découverte des oasis de montagne de Tamerza et Chebika en 4x4 (à réserver et à régler sur place : environ 25€). Déjeuner à l\'hôtel. Visite guidée de Tozeur, petite ville aussi généreuse par sa nature que par ses habitants, insolite et surprenante avec son immense oasis saharienne, sa médina aux constructions typiques couleur sable... Tozeur ne manquera pas de vous charmer ! Puis, départ pour une escapade en direction de Nefta et de son oasis surnommée \"la corbeille\", immense tâche verte au milieu d\'un paysage désertique, célèbre pour sa fraîcheur et ses mille sources. Possibilité de promenade en calèche (à réserver et à régler sur place : environ 10€). Dîner nuit.");
+        etape = new Etape(1,4,"Tozeur",3,"Matinée libre. Possibilité d'effectuer une excursion à la découverte des oasis de montagne de Tamerza et Chebika en 4x4 (à réserver et à régler sur place : environ 25€). Déjeuner à l\'hôtel. Visite guidée de Tozeur, petite ville aussi généreuse par sa nature que par ses habitants, insolite et surprenante avec son immense oasis saharienne, sa médina aux constructions typiques couleur sable... Tozeur ne manquera pas de vous charmer ! Puis, départ pour une escapade en direction de Nefta et de son oasis surnommée \"la corbeille\", immense tâche verte au milieu d\'un paysage désertique, célèbre pour sa fraîcheur et ses mille sources. Possibilité de promenade en calèche (à réserver et à régler sur place : environ 10€). Dîner nuit.");
         list.add(etape);
         return list;
     }
      
     public  PlanningJour getPlanningJour(int j, List<Etape> etapes){
-        String planningName="";
+        String planningDescription="";
         List<String> planningVilles = new ArrayList<String>();
         for (Etape etape: etapes){
             if (etape.getJr()==j){
-                etape.getProgramme();
+                System.out.println("programme etapes: " + etape.getProgramme());
+                planningDescription+=etape.getProgramme();
                 planningVilles.add(etape.getVille());
                 
             }
           
         }
-        return new PlanningJour(j,planningName,planningVilles);
+        System.out.println("Description planning: " + planningDescription);
+        return new PlanningJour(j,planningDescription,planningVilles);
   
     }
 }
