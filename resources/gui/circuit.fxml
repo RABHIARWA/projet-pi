@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#click" prefHeight="300.0" prefWidth="1100.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="circuit_touristique.controllers.CircuitController">
+   <styleClass>
+      <String fx:value="shadow" />
+      <String fx:value="rect-round" />
+      <String fx:value="white_background" />
+   </styleClass>
+   <children>
+      <ImageView fx:id="circuitImage" fitHeight="279.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
+         <HBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </HBox.margin></ImageView>
+      <VBox prefHeight="300.0" prefWidth="583.0">
+         <children>
+            <Label fx:id="circuitNom" alignment="TOP_LEFT" prefHeight="108.0" prefWidth="467.0" text="Nom circuit" wrapText="true">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="circuitDescription" alignment="TOP_LEFT" prefHeight="223.0" prefWidth="466.0" text="Description" wrapText="true">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="30.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
+      <VBox alignment="TOP_RIGHT" prefHeight="300.0" prefWidth="270.0">
+         <children>
+            <Label alignment="TOP_RIGHT" prefHeight="17.0" prefWidth="87.0" text="À partir de">
+               <opaqueInsets>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets right="10.0" top="30.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="circuitPrix" alignment="TOP_RIGHT" prefHeight="27.0" prefWidth="146.0" text="prix" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
+   </children>
+</HBox>

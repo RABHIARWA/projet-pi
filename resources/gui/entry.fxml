@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane fx:id="mainPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="circuit_touristique.controllers.EntryController">
+    <bottom>
+        <Label alignment="BOTTOM_CENTER" maxWidth="Infinity" style="-fx-border-color: #C8C8C8;                -fx-border-width: 1 0 0 0;                -fx-border-style: solid">
+            <text>Copyright roadrevel</text>
+            <padding>
+                <Insets bottom="20" left="20" right="20" top="20" />
+            </padding>
+        </Label>
+    </bottom>
+</BorderPane>
