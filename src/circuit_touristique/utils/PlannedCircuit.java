@@ -4,13 +4,9 @@
  */
 package circuit_touristique.utils;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
-/**
- *
- * @author RFA2ABT
- */
+
 public class PlannedCircuit {
     String circuit_name;
     LocalDate circuit_date;
