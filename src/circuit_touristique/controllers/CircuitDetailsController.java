@@ -8,9 +8,11 @@ import circuit_touristique.entities.Circuit;
 import circuit_touristique.services.EtapeService;
 import circuit_touristique.services.PlanningService;
 import circuit_touristique.services.ServiceCircuit;
+import circuit_touristique.utils.PlannedCircuit;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +21,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -65,6 +68,7 @@ public class CircuitDetailsController {
         circuit_img.setImage(image);
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20, 2);
         requested_number.setValueFactory(valueFactory);
+        date_circuit.setValue(LocalDate.now());
         planned_circuit_view.setVisible(false);
         planned_circuit_view.setManaged(false);
 
@@ -102,19 +106,37 @@ public class CircuitDetailsController {
     private void check_availibility(ActionEvent event) {
         planned_circuit_view.setVisible(false);
         planned_circuit_view.setManaged(false);
+        planned_circuit_view.getChildren().clear();
 
         //boolean isCircuitAvailable(Date date, int capacite) ;
         PlanningService service = new PlanningService();
         boolean isCircuitAvailable = service.isCircuitAvailable(Date.valueOf(date_circuit.getValue()), requested_number.getValue());
         System.out.println("is available:" + isCircuitAvailable);
         if (isCircuitAvailable) {
-            planned_circuit_view.getChildren().add(new Label("Le circuit existe"));
+            //planned_circuit
+            try {
+                //root = FXMLLoader.load(getClass().getResource("/gui/planned_circuit.fxml"));
+                //planned_circuit_view.getChildren().add(root);
+                
+                 FXMLLoader plannedCircuitLoader = new FXMLLoader(getClass().getResource("/gui/planned_circuit.fxml"));
+         
+                 Parent plannedCircuitRoot = plannedCircuitLoader.load();
+
+                    PlannedCircuitController controller = plannedCircuitLoader.getController();
+                    controller.setCircuitReservation(new PlannedCircuit(circuit.getNom(),date_circuit.getValue(),circuit.getPrix()*requested_number.getValue()));
+                    planned_circuit_view.getChildren().add(plannedCircuitRoot);
+
+            } catch (IOException ex) {
+                Logger.getLogger(CircuitDetailsController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             planned_circuit_view.getChildren().add(new Label("Aucun circuit n'est planifié à cette date. \n Veuillez choisir d'autres dates!"));
 
         }
         planned_circuit_view.setVisible(true);
         planned_circuit_view.setManaged(true);
+        
+        
         
     }
 

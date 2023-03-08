@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="circuit_touristique.controllers.PlannedCircuitController">
+   <children>
+      <VBox>
+         <children>
+            <Label fx:id="selected_planned_circuit" alignment="TOP_LEFT" text="Label" wrapText="true">
+               <font>
+                  <Font name="Arial Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+      <VBox>
+         <children>
+            <Label fx:id="citrcuit_total_price" prefHeight="18.0" prefWidth="117.0" text="Label" wrapText="true">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font></Label>
+            <Button fx:id="reserver_circuit_button" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="107.0" text="Reserver">
+               <padding>
+                  <Insets top="1.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+   </children>
+</HBox>
