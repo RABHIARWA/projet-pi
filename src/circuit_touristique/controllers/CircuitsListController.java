@@ -35,7 +35,7 @@ public class CircuitsListController implements Initializable {
 
     private List<Circuit> data() {
         ServiceCircuit serviceCircuit = new ServiceCircuit();
-        return serviceCircuit.getTestData();
+        return serviceCircuit.afficher();
     }
 
     @Override
@@ -62,7 +62,7 @@ public class CircuitsListController implements Initializable {
                     //open in a new window instead
                     Stage stage = new Stage();
                     stage.setTitle("Roadrevel");
-                    stage.setScene(new Scene(circuitDetailRoot, 1200, 850));
+                    stage.setScene(new Scene(circuitDetailRoot, 1300, 900));
                     stage.show();
                     //controller.mainPane.setBackground(Background.EMPTY);
                 } catch (IOException ex) {
@@ -76,10 +76,12 @@ public class CircuitsListController implements Initializable {
 
         try {
             for (int i = 0; i < circuits.size(); i++) {
+               
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/circuit.fxml"));
                 HBox circuitBox = fxmlLoader.load();
                 CircuitController circuitController = fxmlLoader.getController();
                 circuitController.setData(circuits.get(i), circuitListener);
+                
                 if (columns == 1) {
                     columns = 0;
                     ++rows;

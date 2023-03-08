@@ -29,7 +29,7 @@ public class EtapeService {
             Statement st = cnx.createStatement();
             ResultSet result = st.executeQuery(req);
             while (result.next()) {
-                list.add(new Etape(result.getInt("nc"), result.getInt("rang"), result.getString("ville"),result.getInt("nbj"), result.getString("programme")));
+                list.add(new Etape(result.getInt("nc"), result.getInt("rang"), result.getString("ville"),result.getInt("jr"), result.getString("programme")));
             }
             System.out.println("Personnes récupérées !");
         } catch (SQLException ex) {
@@ -57,14 +57,12 @@ public class EtapeService {
         List<String> planningVilles = new ArrayList<String>();
         for (Etape etape: etapes){
             if (etape.getJr()==j){
-                System.out.println("programme etapes: " + etape.getProgramme());
                 planningDescription+=etape.getProgramme();
                 planningVilles.add(etape.getVille());
                 
             }
           
         }
-        System.out.println("Description planning: " + planningDescription);
         return new PlanningJour(j,planningDescription,planningVilles);
   
     }

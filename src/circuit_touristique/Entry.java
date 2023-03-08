@@ -16,7 +16,7 @@ public class Entry extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/gui/circuits.fxml"));
-        Scene scene = new Scene(root, 1510, 850);
+        Scene scene = new Scene(root, 1000, 850);
         stage.setScene(scene);
         stage.setTitle("Roadrevel");
         stage.show();
