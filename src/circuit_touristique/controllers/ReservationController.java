@@ -65,6 +65,13 @@ public class ReservationController implements Initializable {
     @FXML
     private Label prix_total_summury;
 
+
+    
+    final String senderEmailId = "roadrevel.app@gmail.com";
+    final String senderPassword = "oczqfznhunocxyvp";
+    final String emailSMTPserver = "smtp.gmail.com";
+    final String emailSMTPPort = "587";
+
     /**
      * Initializes the controller class.
      */
@@ -93,47 +100,46 @@ public class ReservationController implements Initializable {
         prix_total_summury.setText(circuit.getPrix() * nbr_personnes + " DNT");
     }
 
+    private class SMTPAuthenticator extends
+            javax.mail.Authenticator {
+
+        public PasswordAuthentication
+                getPasswordAuthentication() {
+            return new PasswordAuthentication(senderEmailId,
+                    senderPassword);
+        }
+    }
+
     public void sendReservationConfirmationEmail(ReservationCircuit reservation) {
 
-        String to = tourist_email_control_label.getText();
-        String from = "arwarebhi180@gmail.com";
-        String host = "localhost";
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", emailSMTPserver);
+        props.put("mail.smtp.port", emailSMTPPort);
 
-        
-        final String username = "arwarebhi180@gmail.com";
-        final String password = "";
-
-        Properties prop = new Properties();
-        prop.put("mail.smtp.host", "stmp.gmail.com");
-        prop.put("mail.smtp.port", "587");
-        prop.put("mail.smtp.auth", "true");
-        prop.put("mail.smtp.starttls.enable", "true"); //TLS
-
-        Session session = Session.getInstance(prop,
-                new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
-            }
-        });
-        //compose the message  
         try {
-            MimeMessage message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(from));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            message.setSubject("Confirmation de Réservation");
-            message.setText("Bonjour, Votre réservation du circuit " +reservation.getNc()+" est confirmee :) !");
+            Authenticator auth = new SMTPAuthenticator();
+            Session session = Session.getInstance(props, auth);
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(senderEmailId));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(tourist_email.getText()));
 
-            // Send message  
+            message.setSubject("Confirmation Réservation");
+            message.setContent("Bonjour", "text/html");
+
             Transport.send(message);
-            System.out.println("message sent successfully....");
-
-        } catch (MessagingException mex) {
-            mex.printStackTrace();
+            System.out.println("Email send successfully.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Error in sending email.");
         }
     }
 
     @FXML
-    private void confirm_reservation(ActionEvent event) {
+    private void confirm_reservation(ActionEvent event
+    ) {
 
         tourist_vorname_control_label.setVisible(false);
         tourist_vorname_control_label.setManaged(false);
@@ -145,7 +151,7 @@ public class ReservationController implements Initializable {
         // if the user added required data, proceed with reservation confirmation
         if (!tourist_vorname.getText().isEmpty() && !tourist_name.getText().isEmpty() && !tourist_email.getText().isEmpty()) {
             System.out.println("Confirm circuit reservation");
-            
+
             ReservationCircuit reservation = new ReservationCircuit(156, circuit.getNc(), date_debut_circuit, nbr_personnes);
             ReservationService reservationService = new ReservationService();
             reservationService.ajouter(reservation);
@@ -153,7 +159,7 @@ public class ReservationController implements Initializable {
             int nouvelleCapacite = planningService.getCapacity(circuit.getNc(), date_debut_circuit) - nbr_personnes;
             PlanningCircuit planning = new PlanningCircuit(circuit.getNc(), date_debut_circuit, nouvelleCapacite);
             planningService.modifierCapacite(planning);
-            
+
             // send confirmation email to the user
             sendReservationConfirmationEmail(reservation);
         } else {
