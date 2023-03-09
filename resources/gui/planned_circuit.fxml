@@ -27,7 +27,7 @@
                <font>
                   <Font name="Arial" size="18.0" />
                </font></Label>
-            <Button fx:id="reserver_circuit_button" alignment="BOTTOM_RIGHT" text="Réserver ">
+            <Button fx:id="reserver_circuit_button" alignment="BOTTOM_RIGHT" onAction="#reserver_circuit" text="Réserver ">
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin>

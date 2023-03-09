@@ -117,14 +117,14 @@ public class CircuitDetailsController {
             try {
                 //root = FXMLLoader.load(getClass().getResource("/gui/planned_circuit.fxml"));
                 //planned_circuit_view.getChildren().add(root);
-                
-                 FXMLLoader plannedCircuitLoader = new FXMLLoader(getClass().getResource("/gui/planned_circuit.fxml"));
-         
-                 Parent plannedCircuitRoot = plannedCircuitLoader.load();
 
-                    PlannedCircuitController controller = plannedCircuitLoader.getController();
-                    controller.setCircuitReservation(new PlannedCircuit(circuit.getNom(),date_circuit.getValue(),circuit.getPrix()*requested_number.getValue()));
-                    planned_circuit_view.getChildren().add(plannedCircuitRoot);
+                FXMLLoader plannedCircuitLoader = new FXMLLoader(getClass().getResource("/gui/planned_circuit.fxml"));
+
+                Parent plannedCircuitRoot = plannedCircuitLoader.load();
+
+                PlannedCircuitController controller = plannedCircuitLoader.getController();
+                controller.setCircuitReservation(circuit, requested_number.getValue(), Date.valueOf(date_circuit.getValue()));
+                planned_circuit_view.getChildren().add(plannedCircuitRoot);
 
             } catch (IOException ex) {
                 Logger.getLogger(CircuitDetailsController.class.getName()).log(Level.SEVERE, null, ex);
@@ -135,9 +135,7 @@ public class CircuitDetailsController {
         }
         planned_circuit_view.setVisible(true);
         planned_circuit_view.setManaged(true);
-        
-        
-        
+
     }
 
 }
