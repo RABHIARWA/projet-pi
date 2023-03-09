@@ -20,6 +20,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import java.util.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.VBox;
 import javax.mail.*;
 import javax.mail.internet.*;
 import javax.activation.*;
@@ -71,13 +77,19 @@ public class ReservationController implements Initializable {
     final String senderPassword = "oczqfznhunocxyvp";
     final String emailSMTPserver = "smtp.gmail.com";
     final String emailSMTPPort = "587";
+    @FXML
+    private RadioButton select_book;
+    @FXML
+    private RadioButton select_bay;
+    @FXML
+    private VBox payment_vbox;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        payment_vbox.managedProperty().bind(payment_vbox.visibleProperty());
         tourist_vorname_control_label.setTextFill(Color.RED);
         tourist_name_control_label.setTextFill(Color.RED);
         tourist_email_control_label.setTextFill(Color.RED);
@@ -88,6 +100,24 @@ public class ReservationController implements Initializable {
         tourist_name_control_label.setManaged(false);
         tourist_email_control_label.setVisible(false);
         tourist_email_control_label.setManaged(false);
+        
+        ToggleGroup toggleGroup = new ToggleGroup();
+        select_bay.setToggleGroup(toggleGroup);
+        select_book.setToggleGroup(toggleGroup);
+        
+        toggleGroup.selectedToggleProperty().addListener((observable, oldVal, newVal) -> {
+            RadioButton chk = (RadioButton)newVal.getToggleGroup().getSelectedToggle();
+            System.out.println(chk.getId());
+            if(chk.getId().equals("select_bay")){
+             payment_vbox.setVisible(true);
+            }
+            else {
+                  payment_vbox.setVisible(false);
+                  payment_vbox.managedProperty().bind(payment_vbox.visibleProperty());
+            } 
+            System.out.println(toggleGroup.getSelectedToggle().toString());
+        });
+               
     }
 
     public void setCircuitReservation(Circuit circuit, int nbr_personnes, Date date_debut_circuit) {

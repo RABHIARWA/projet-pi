@@ -4,6 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -110,62 +111,111 @@
                         <Insets top="20.0" />
                      </VBox.margin>
                   </Label>
-                  <Label text="Nom du titulaire de la carte">
+                  <Label text="Choississez une date de paiement ">
+                     <font>
+                        <Font name="Arial Bold" size="14.0" />
+                     </font>
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
-                     <font>
-                        <Font name="Arial" size="14.0" />
-                     </font>
                   </Label>
-                  <TextField fx:id="payment_card_name">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <Label text="Numéro de carte bancaire">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font name="Arial" size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="payment_card_number">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
+                  <VBox>
                      <children>
-                        <VBox>
-                           <children>
-                              <Label text="Date d'expiration" wrapText="true">
-                                 <font>
-                                    <Font name="Arial" size="14.0" />
-                                 </font>
-                              </Label>
-                              <TextField fx:id="card_expiration_date" />
-                           </children>
-                        </VBox>
-                        <VBox>
-                           <children>
-                              <Label text="Code de sécurité" wrapText="true">
-                                 <font>
-                                    <Font name="Arial" size="14.0" />
-                                 </font>
-                              </Label>
-                              <TextField fx:id="card_security_code" />
-                           </children>
-                           <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin>
-                        </VBox>
+                        <RadioButton fx:id="select_book" mnemonicParsing="false" selected="true" text="Réservez maintenant et payez plus tard" wrapText="true">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font>
+                        </RadioButton>
+                        <RadioButton fx:id="select_bay" mnemonicParsing="false" text="Payez maintenant" wrapText="true">
+                           <VBox.margin>
+                              <Insets bottom="20.0" top="50.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font>
+                        </RadioButton>
                      </children>
-                  </HBox>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </VBox>
+                  <VBox fx:id="payment_vbox" visible="false">
+                     <children>
+                        <Label text="Payez par" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="Nom du titulaire de la carte">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TextField fx:id="payment_card_name">
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label text="Numéro de carte bancaire">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TextField fx:id="payment_card_number">
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <VBox>
+                                 <children>
+                                    <Label text="Date d'expiration" wrapText="true">
+                                       <font>
+                                          <Font name="Arial" size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField fx:id="card_expiration_date" />
+                                 </children>
+                              </VBox>
+                              <VBox>
+                                 <children>
+                                    <Label text="Code de sécurité" wrapText="true">
+                                       <font>
+                                          <Font name="Arial" size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField fx:id="card_security_code" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </VBox>
                   <Button fx:id="reserve_button" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#confirm_reservation" text="Réserver maintenant">
                      <VBox.margin>
                         <Insets top="20.0" />
