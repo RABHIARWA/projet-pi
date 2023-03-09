@@ -56,6 +56,14 @@ public class ReservationController implements Initializable {
     private Label tourist_name_control_label;
     @FXML
     private Label tourist_email_control_label;
+    @FXML
+    private Label circuit_name_summury;
+    @FXML
+    private Label circuit_nb_personnes;
+    @FXML
+    private Label circuit_date_summary;
+    @FXML
+    private Label prix_total_summury;
 
     /**
      * Initializes the controller class.
@@ -79,7 +87,10 @@ public class ReservationController implements Initializable {
         this.circuit = circuit;
         this.date_debut_circuit = date_debut_circuit;
         this.nbr_personnes = nbr_personnes;
-
+        circuit_name_summury.setText(circuit.getNom());
+        circuit_nb_personnes.setText(nbr_personnes + " personnes");
+        circuit_date_summary.setText(date_debut_circuit.toString());
+        prix_total_summury.setText(circuit.getPrix() * nbr_personnes + " DNT");
     }
 
     public void sendReservationConfirmationEmail(ReservationCircuit reservation) {
